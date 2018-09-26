@@ -11,15 +11,15 @@ python 3.6
 
 Use: 
 
-	pip install -r requirements.txt
+	$ pip install -r requirements.txt
 	$ python getEmails.py
 
 '''It will prompt you to enter your mail credentials: '''
 	Enter gmail username: 
 	Enter gmail password: 
 
-	'''Might need to turn off less secure apps for gmail: https://support.google.com/accounts/answer/6010255?hl=en 
-	or sign in using App passwords: https://support.google.com/accounts/answer/185833 (recommended) '''
+Might need to turn off less secure apps for gmail: https://support.google.com/accounts/answer/6010255?hl=en 
+or sign in using App passwords: https://support.google.com/accounts/answer/185833 (recommended)
 
 ### Email Reading Agent:
 
@@ -34,11 +34,11 @@ Use:
 Returns the data stored in pkl/emailsDict.pkl
 It will prompt you for an option and the number of emails you want to print :
 Options:
--'content'
--'subject'
--'from'
--'id'
--'help': Displays all the options
+- 'content'
+- 'subject'
+- 'from'
+- 'id'
+- 'help': Displays all the options
 - None for default(everything in python dict)
 
 
