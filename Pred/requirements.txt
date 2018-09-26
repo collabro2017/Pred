@@ -1,4 +1,0 @@
-sklearn
-numpy
-beautifulsoup4
-scipy
