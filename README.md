@@ -19,7 +19,7 @@ Use:
 	Enter gmail password: 
 
 Might need to turn off less secure apps for gmail: https://support.google.com/accounts/answer/6010255?hl=en 
-or sign in using App passwords: https://support.google.com/accounts/answer/185833 (recommended)
+or sign in using App passwords with 2-step verification: https://support.google.com/accounts/answer/185833 (recommended)
 
 ### Email Reading Agent:
 
