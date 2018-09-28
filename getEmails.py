@@ -49,8 +49,7 @@ def isImportantEmail(email):
     isInterrogative = isInterrogative[1:]
 
     if shouldReply[0] == "1" or (isAutomated[0] == "0" and isInterrogative[0].upper() == "TRUE"):
-        print("Should reply to this email")
-        print("\n\n")
+        print("Should reply to this email\n\n")
         return True
 
     print("\n\n")
@@ -309,9 +308,12 @@ def getData(option="default"):
 
 def main(username,password):
 
-    if(username=='' and password ==''):
-        username = input("Enter email username : ")
-        password = input("Enter password : ")
+    if not os.path.exists("pkl"):
+        try:
+            os.makedirs("pkl", exist_ok=True)
+        except Exception as e:
+            print("Couldnt create directory pkl")
+            print(e)
 
     if(not os.path.isfile('pkl/emailsDict.pkl')):
         print('Fetching emails from ' + str(username))
