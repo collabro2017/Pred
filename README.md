@@ -1,6 +1,5 @@
 ## Learning-Based-Email-Reply-Prediction
 
-Based on: Intelligent Email Prediction System (IEPS) (Paper in repo)
 Developed by Codetrip.es 
 Jose Sanchez and Juan Verhook
 
@@ -22,6 +21,7 @@ Might need to turn off less secure apps for gmail: https://support.google.com/ac
 or sign in using App passwords with 2-step verification: https://support.google.com/accounts/answer/185833 (recommended)
 
 ### Email Reading Agent:
+Based on: Intelligent Email Prediction System (IEPS) (Paper in repo)
 
 Read the last 10 emails from the user inbox and checks for new emails every 2 minutes, if there is a new email the agent will detect if the email requires a response or not. 
 
