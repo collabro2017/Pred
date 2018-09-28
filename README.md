@@ -23,7 +23,7 @@ or sign in using App passwords with 2-step verification: https://support.google.
 ### Email Reading Agent:
 Based on: Intelligent Email Prediction System (IEPS) (Paper in repo)
 
-Read the last 10 emails from the user inbox and checks for new emails every 2 minutes, if there is a new email the agent will detect if the email requires a response or not. 
+Reads the last 10 emails from the user inbox and checks for new emails every 2 minutes, if there is a new email the agent will detect if the email requires a response or not. 
 
 #### Optional arg 'getdata'
 
