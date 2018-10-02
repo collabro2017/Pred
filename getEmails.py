@@ -6,14 +6,6 @@ from bs4 import BeautifulSoup
 from random import randint
 import sys
 
-from email import message_from_bytes
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.utils import make_msgid
-
-from subprocess import call
-from textwrap import dedent
-
 import csv
 import pickle
 
@@ -23,6 +15,7 @@ import datetime
 
 import time
 
+import AutoReply as autoRep
 
 
 def isImportantEmail(email):
@@ -165,36 +158,6 @@ def getInboxEmails(username, password, Num_MAIL=10):
     return inboxEmails
 
 
-def create_auto_reply(original):
-    mail = MIMEMultipart('alternative')
-    mail['Message-ID'] = make_msgid()
-    mail['References'] = mail['In-Reply-To'] = original['Message-ID']
-    mail['Subject'] = 'Re: ' + original['Subject']
-    mail['From'] = username
-    mail['To'] = original['Reply-To'] or original['From']
-    mail.attach(MIMEText(dedent(body % usefulVars['randId']), 'plain'))
-    return mail
-
-def send_auto_reply(original):
-    smtp.sendmail(
-       username, [original['From']],
-        create_auto_reply(original).as_bytes())
-    log = 'Replied to “%s” for the mail “%s”' % (original['From'],
-                                                 original['Subject'])
-    print(log)
-    try:
-        call(['notify-send', log])
-    except FileNotFoundError:
-        pass
-
-def reply(mail_number):
-    imap.select(readonly=True)
-    _, data = imap.fetch(mail_number, '(RFC822)')
-    imap.close()
-    send_auto_reply(message_from_bytes(data[0][1]))
-    imap.select(readonly=False)
-    imap.store(mail_number, '+FLAGS', '\\Answered')
-    imap.close()
 
 def tagEmailThreads(username, password):
     inboxEmails = getInboxEmails(username,password)
@@ -230,12 +193,15 @@ def checkNewMail(username, password):
             print("There are new emails in the inbox")
             newEmailsInInbox = True
             newEmails.append(inboxEmails[i])
+
             if(isImportantEmail(inboxEmails[i])):
                 anImportantMail = True
                 rand = random_with_N_digits(6)
                 usefulVars['randId'] = rand
-                reply(str(usefulVars['inboxLen']-i))
+                # reply(str(usefulVars['inboxLen']-i))
                 randomIDs.append(rand)
+                autoRep.replyAutomatically(inboxEmails[i], rand, str(usefulVars['inboxLen']-i), imap, smtp, username) 
+
             else:
                 print("New email not worth replying to.")
         else:
