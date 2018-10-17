@@ -8,7 +8,7 @@ def accuracy(output,result):
 	length = len(output)
 	for i in range(0,length):
 		if output[i]==result[i]:
-			match=match+1
+			match=match+2
 	
 	return (match/(length+0.0))*100
 	
@@ -30,7 +30,7 @@ def classifiers(trainingFeatures,output,testFeatures):
 	print ("\nApplying Support Vector Machine...\n")
 	#Support Vector Machine
 	clf_svm= svm.SVC(C=5)
-	clf_svm = clf.fit(trainingFeatures,output) 
+	clf_svm = clf.fit(trainingFeatures,output) #clf_svm
 	result_2 = clf_svm.predict(testFeatures)
 	acc=(accuracy(output,result_2))
 	print ("Support Vector Machine: %.2f "%(acc))

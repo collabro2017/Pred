@@ -5,7 +5,7 @@ import Classifier as cf
 from pprint import pprint
 import CSV
 
-userEmail = 'example@mail.com'
+userEmail = 'example@gmail.com'
 DEFAULT = "default-id"
 
 interrogative_words=["could", "which", "what" , "whose" , "who", "whom" ,"where", "when" ,"how" ,"why", "wherefore" ,"whether","question","need answer"]
@@ -134,6 +134,7 @@ def extractFeatures():
 
     # dumping in csv
     CSV.listtocsv(inboxEmailFeatures[:halfSize],output[:halfSize],result_1,result_2,result_3)
+        
         
 
         

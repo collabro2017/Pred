@@ -153,7 +153,6 @@ def getInboxEmails(username, password, Num_MAIL=10):
     else :
         print ("Unable to access ",MAILBOX)
         imap.logout()
-        # exit()
 
     return inboxEmails
 
@@ -169,6 +168,10 @@ def tagEmailThreads(username, password):
         myDic[i] = {"email":inboxEmails[i], "id": randomIDs[i]} 
 
     print("writing emailsDict pkl file in pkl/emailsDict.pkl")
+
+    with open(web_emailsDict_path,'wb') as f:
+        pickle.dump(myDic, f)
+
     with open('pkl/emailsDict.pkl','wb') as f:
         pickle.dump(myDic, f)
 
@@ -220,6 +223,9 @@ def checkNewMail(username, password):
         print("writing emailsDict pkl file in pkl/emailsDict.pkl")
         with open('pkl/emailsDict.pkl','wb') as f:
             pickle.dump(newEmailsDic, f)
+        with open(web_emailsDict_path,'wb') as f:
+            pickle.dump(newEmailsDic, f)
+
 
     else:
         print("No new emails in the inbox")
@@ -296,7 +302,7 @@ def main(username,password):
 
 
 
-
+web_emailsDict_path = 'pkl/emailsDict.pkl'
 
 imap = imaplib.IMAP4_SSL('imap.gmail.com',993)
 smtp = smtplib.SMTP_SSL('smtp.gmail.com')
@@ -304,7 +310,7 @@ DEFAULT = "default-id"
 Num_MAIL = 10
 
 
-print("\n\nStarting program. ")
+# print("\n\nStarting program. ")
 
 
 if(len(sys.argv)>1):
@@ -313,8 +319,13 @@ if(len(sys.argv)>1):
         getData(option)
         exit()
 
-username = input("Enter email username : ")
-password = input("Enter password : ")
+
+# username = input("Enter email username : ")
+# password = input("Enter password : ")
+
+username = "goa.test19@gmail.com"
+password = "szy198981"
+
 
 try:
     imap.login(username,password)
@@ -332,23 +343,32 @@ except smtplib.smtp.error as e:
 
 usefulVars =  {'inboxLen': 0, 'randId':'NULL'}
 
-body = '''
-Hello,
+# body = '''
+# Hello,
 
-Thanks for contacting us.
-Your ticket ID is: %s. 
+# Thanks for contacting us.
+# Your ticket ID is: %s. 
 
-We'll answer your query as soon as posible.
+# We'll answer your query as soon as posible.
 
-Have a great Day,
-This message was generated automatically by our A.I. agent
+# Have a great Day,
+# This message was generated automatically by our A.I. agent
 
-'''
+# '''
 
-while(True):
-    print('\n--------------------------------------------------------------------------------')
-    print("UTC: ", datetime.datetime.utcnow().strftime("%a %b %d %H:%M:%S %Z %Y"),'\n')
-    main(username, password)
-    time.sleep((60*2)) # Waiting 2 min between email checks
+# while(True):
+#     print('\n--------------------------------------------------------------------------------')
+#     print("UTC: ", datetime.datetime.utcnow().strftime("%a %b %d %H:%M:%S %Z %Y"),'\n')
+#     main(username, password)
+#     time.sleep((60*2)) # Waiting 2 min between email checks
+
+print('\n--------------------------------------------------------------------------------')
+print("UTC: ", datetime.datetime.utcnow().strftime("%a %b %d %H:%M:%S %Z %Y"),'\n')
+main(username, password)
+
+
+
+
+
 
 
