@@ -1,8 +1,7 @@
 ## Learning-Based-Email-Reply-Prediction
 
 Based on: Intelligent Email Prediction System (IEPS) (Paper in repo)
-Developed by Codetrip.es 
-Jose Sanchez and Juan Verhook
+Developed by goa and alejandro
 
 
 ### Requirements:
