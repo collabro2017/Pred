@@ -8,7 +8,7 @@ def accuracy(output,result):
 	length = len(output)
 	for i in range(0,length):
 		if output[i]==result[i]:
-			match=match+2
+			match=match+1
 	
 	return (match/(length+0.0))*100
 	

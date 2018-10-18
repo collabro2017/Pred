@@ -1,0 +1,1726 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{SlotTaggingRNN}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{data}\PY{n+nn}{.}\PY{n+nn}{load}
+         
+         \PY{n}{train\PYZus{}set}\PY{p}{,} \PY{n}{valid\PYZus{}set}\PY{p}{,} \PY{n}{dicts} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{load}\PY{o}{.}\PY{n}{atisfull}\PY{p}{(}\PY{p}{)}
+         \PY{n}{w2idx}\PY{p}{,} \PY{n}{labels2idx} \PY{o}{=} \PY{n}{dicts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{words2idx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dicts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labels2idx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{w2idx}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels2idx}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}x}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{train\PYZus{}label} \PY{o}{=} \PY{n}{train\PYZus{}set}
+         \PY{n}{val\PYZus{}x}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{val\PYZus{}label} \PY{o}{=} \PY{n}{valid\PYZus{}set}
+         
+         \PY{c+c1}{\PYZsh{} Create index to word/label dicts}
+         \PY{n}{idx2w}  \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{w2idx}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{:}\PY{n}{k} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{w2idx}\PY{p}{\PYZcb{}}
+         \PY{n}{idx2la} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{labels2idx}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{:}\PY{n}{k} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{labels2idx}\PY{p}{\PYZcb{}}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{idx2w}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{idx2la}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} For conlleval script}
+         \PY{n}{words\PYZus{}train} \PY{o}{=} \PY{p}{[} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{idx2w}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{train\PYZus{}x}\PY{p}{]}
+         \PY{n}{labels\PYZus{}train} \PY{o}{=} \PY{p}{[} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{idx2la}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{train\PYZus{}label}\PY{p}{]}
+         \PY{n}{words\PYZus{}val} \PY{o}{=} \PY{p}{[} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{idx2w}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{val\PYZus{}x}\PY{p}{]}
+         \PY{n}{labels\PYZus{}val} \PY{o}{=} \PY{p}{[} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{idx2la}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{val\PYZus{}label}\PY{p}{]}
+         
+         \PY{n}{n\PYZus{}classes} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{idx2la}\PY{p}{)}
+         \PY{n}{n\PYZus{}vocab} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{idx2w}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{words\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{words\PYZus{}val}\PY{p}{[}\PY{l+m+mi}{800}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels\PYZus{}val}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\{'all': 32, 'coach': 110, 'cincinnati': 102, 'people': 374, 'month': 318, 'four': 202, 'code': 111, 'go': 213, 'show': 439, 'thursday': 496, 'to': 502, 'restriction': 405, 'dinnertime': 151, 'under': 529, 'sorry': 450, 'include': 235, 'midwest': 311, 'worth': 564, 'southwest': 451, 'me': 301, 'returning': 408, 'far': 181, 'vegas': 539, 'airfare': 24, 'ticket': 498, 'difference': 148, 'arrange': 54, 'tickets': 499, 'louis': 286, 'cheapest': 99, 'list': 276, 'wednesday': 546, 'leave': 268, 'heading': 222, 'ten': 474, 'direct': 152, 'turboprop': 520, 'rate': 395, 'cost': 121, 'quebec': 392, 'layover': 266, 'air': 22, 'what': 554, 'stands': 454, 'chicago': 100, 'schedule': 419, 'transcontinental': 510, 'goes': 214, 'new': 332, 'transportation': 512, 'here': 225, 'hours': 228, 'let': 272, 'twentieth': 523, 'along': 33, 'thrift': 494, 'passengers': 371, 'great': 216, 'thirty': 490, 'canadian': 91, 'leaves': 269, 'alaska': 31, 'leaving': 270, 'amount': 38, 'weekday': 549, 'makes': 294, 'midway': 310, 'montreal': 319, 'via': 541, 'depart': 138, 'county': 124, 'names': 327, 'stand': 453, 'total': 507, 'seventeenth': 434, 'use': 533, 'twa': 521, 'from': 208, 'would': 565, 'abbreviations': 15, 'destination': 144, 'only': 360, 'next': 334, 'live': 278, 'shortest': 437, 'limousine': 275, 'tell': 473, 'today': 503, 'more': 320, 'DIGIT': 8, 'm80': 292, 'downtown': 159, 'train': 509, 'tampa': 471, 'fly': 196, 'f': 179, 'this': 491, 'car': 93, 'anywhere': 44, 'can': 89, 'following': 199, 'making': 295, 'arrive': 58, 'my': 325, 'could': 123, 'give': 212, 'december': 134, 'numbers': 348, 'want': 542, 'DIGITDIGITDIGITDIGITDIGITDIGIT': 12, 'airplane': 27, 'times': 501, 'information': 237, 'tacoma': 466, 'provide': 388, 'travel': 513, 'six': 440, 'dinner': 150, 'located': 280, 'sunday': 463, 'fourth': 204, 'types': 527, 'beach': 71, 'nonstop': 339, 'economy': 168, 'fare': 182, 'okay': 357, 'y': 566, 'may': 299, 'earlier': 164, 'plane': 381, 'ff': 185, 'coming': 115, 'eighth': 171, 'fn': 198, 'las': 260, 'a': 13, 'boeing': 74, 'third': 487, 'departure': 141, 'q': 390, 'so': 446, 'rentals': 400, 'houston': 229, 'serving': 433, 'help': 224, 'september': 426, 'over': 370, 'midnight': 309, 'soon': 449, 'logan': 281, 'through': 495, 'milwaukee': 312, 'still': 457, 'before': 72, 'thirtieth': 489, 'thank': 479, 'fit': 191, 'how': 230, 'trying': 517, 'denver': 137, 'actually': 18, 'late': 263, 'offers': 355, 'listing': 277, 'texas': 477, 'DIGITDIGITDIGITDIGIT': 11, 'then': 483, 'evening': 174, 'return': 407, 'yn': 568, 'lunch': 290, 'wednesdays': 547, 'they': 486, 'arriving': 60, 'now': 346, 'rental': 399, 'day': 130, 'landings': 259, 'february': 184, 'airports': 30, 'name': 326, 'sundays': 464, 'january': 244, 'detroit': 145, 'each': 163, 'meal': 302, 'dulles': 160, 'petersburg': 375, 'thirteenth': 488, 'ea': 162, 'used': 534, 'arrives': 59, 'connect': 116, 'requesting': 402, 'tenth': 476, 'saturday': 416, 'out': 369, 'canada': 90, 'looking': 284, 'arizona': 52, 'cars': 96, 'friday': 206, 'seventh': 435, 'california': 88, 'york': 569, 'bwi': 85, 'ord': 364, 'earliest': 165, 'repeat': 401, 'dc10': 133, 'atl': 63, 'florida': 195, 'days': 131, 'round': 410, 'american': 37, 'afternoon': 20, 'st.': 452, 'first': 190, 'there': 484, 'number': 347, 'one': 359, 'eleventh': 173, 'approximately': 48, 'another': 42, 'tomorrow': 504, '<UNK>': 7, 'city': 104, 'service': 430, 'twenty': 524, 'dfw': 146, 'weekdays': 550, 'least': 267, 'their': 482, 'rates': 396, 'DIGITDIGITDIGIT': 10, 'time': 500, 'too': 505, 'sixteenth': 442, 'that': 480, 'pittsburgh': 379, 'serve': 427, 'july': 248, 'than': 478, 'toronto': 506, 'distance': 154, 'kind': 252, 'b': 67, 'second': 424, 'pennsylvania': 373, 'classes': 106, 'other': 368, 'traveling': 514, 'and': 40, 'charlotte': 97, 'san': 415, 'stopovers': 460, 'boston': 77, 'takeoff': 468, 'say': 418, 'buy': 84, 'rent': 398, 'have': 221, 'need': 331, 'breakfast': 80, 'philly': 377, 'any': 43, 'sa': 412, 'dallas': 128, 'also': 34, 'without': 563, 'take': 467, 'which': 557, 'sure': 465, 'price': 386, 'who': 558, 'serviced': 431, 'most': 323, 'eight': 169, 'landing': 258, 'services': 432, 'america': 36, 'class': 105, 'later': 264, 'm': 291, 'nineteenth': 336, 'salt': 413, 'departing': 139, 'cheap': 98, 'tuesdays': 519, 'find': 189, 'fifth': 188, 'ground': 217, 'snack': 445, 'with': 561, 'explain': 177, 'minnesota': 314, 'should': 438, 'flights': 194, 'going': 215, 'qx': 394, 'carolina': 94, 'do': 156, 'dl': 155, 'get': 211, 'michigan': 308, 'express': 178, 'stop': 458, 'dc': 132, 'international': 239, 'during': 161, 'westchester': 553, 'qw': 393, 'stapleton': 455, 'h': 219, 'morning': 321, 'wish': 560, 'ohio': 356, 'where': 556, 'qo': 391, 'arrival': 56, 'eighteenth': 170, 'up': 531, 'connections': 119, 'see': 425, 'are': 50, 'close': 108, 'yes': 567, 'capacity': 92, 'please': 383, 'smallest': 444, 'various': 538, 'between': 73, 'f28': 180, 'available': 66, 'we': 545, 'august': 65, 's': 411, 'nashville': 328, 'aircraft': 23, 'fifteenth': 187, 'cities': 103, 'jfk': 246, 'both': 78, 'c': 87, 'last': 261, 'many': 296, 'taking': 470, 'la': 255, 'trips': 516, 'april': 49, 'connection': 118, 'baltimore': 69, 'flies': 192, 'co': 109, 'tuesday': 518, 'nonstops': 340, 'tennessee': 475, 'stopover': 459, 'cp': 125, 'november': 345, 'expensive': 176, 'west': 552, 'airlines': 26, 'nationair': 329, 'much': 324, 'define': 135, 'mco': 300, 'flight': 193, 'eastern': 167, 'airplanes': 28, 'lives': 279, 'prices': 387, 'atlanta': 64, 'an': 39, 'those': 492, 'sfo': 436, 'georgia': 210, 'look': 283, 'these': 485, 'originate': 365, 'choices': 101, 'will': 559, 'near': 330, 'itinerary': 243, 'stopping': 461, 'mitchell': 316, 'fourteenth': 203, 'thursdays': 497, 'is': 241, 'it': 242, 'arrangements': 55, 'in': 234, 'seattle': 423, 'if': 233, 'different': 149, 'make': 293, 'airport': 29, 'same': 414, 'northwest': 344, 'ewr': 175, 'twelfth': 522, 'week': 548, 'indianapolis': 236, 'diego': 147, 'takeoffs': 469, 'uses': 535, 'two': 525, 'database': 129, 'i': 232, 'well': 551, 'options': 362, 'costs': 122, 'jersey': 245, 'very': 540, 'the': 481, 'latest': 265, 'taxi': 472, 'just': 250, 'less': 271, 'ninth': 337, 'abbreviation': 14, 'seats': 422, 'love': 287, 'paul': 372, 'jose': 247, 'sixteen': 441, 'lake': 256, 'book': 75, 'ap80': 47, 'fares': 183, 'has': 220, 'march': 297, 'around': 53, 'utah': 537, 'possible': 385, 'early': 166, 'know': 254, 'schedules': 420, 'using': 536, 'like': 273, 'd': 126, 'miami': 307, 'orlando': 367, 'arrivals': 57, 'either': 172, 'night': 335, 'served': 428, 'tower': 508, 'limo': 274, 'seating': 421, 'right': 409, 'saturdays': 417, 'lastest': 262, 'some': 447, 'back': 68, "'t": 5, 'serves': 429, 'cleveland': 107, "'s": 4, 'transport': 511, 'provided': 389, 'oakland': 351, 'phoenix': 378, 'for': 200, 'noon': 341, 'stops': 462, 'newark': 333, 'does': 157, 'connecting': 117, 'booking': 76, 'be': 70, 'columbus': 114, 'business': 82, 'reaching': 397, 'sixth': 443, 'departures': 142, 'ap57': 46, 'by': 86, 'after': 19, 'on': 358, 'about': 16, 'noontime': 342, 'DIGITDIGIT': 9, 'of': 353, 'dollars': 158, 'burbank': 81, 'angeles': 41, 'carries': 95, 'airline': 25, 'mean': 304, 'or': 363, 'plan': 380, 'colorado': 113, 'united': 530, 'into': 240, 'within': 562, 'washington': 543, 'bound': 79, 'three': 493, 'your': 571, 'guardia': 218, 'ontario': 361, 'area': 51, 'flying': 197, 'philadelphia': 376, 'long': 282, 'continental': 120, 'los': 285, '72s': 6, 'way': 544, 'lowest': 288, 'mornings': 322, 'north': 343, 'offer': 354, 'hp': 231, 'restrictions': 406, 'but': 83, 'hi': 226, 'delta': 136, 'highest': 227, 'memphis': 306, 'fort': 201, 'october': 352, 'type': 526, 'maximum': 298, 'us': 532, "'re": 3, 'planes': 382, 'pm': 384, 'ua': 528, 'display': 153, 'originating': 366, 'ac': 17, 'reservations': 404, 'describe': 143, 'am': 35, 'minneapolis': 313, 'general': 209, 'ap': 45, 'as': 61, 'sometime': 448, 'at': 62, 'trip': 515, 'again': 21, 'codes': 112, "'ll": 1, 'no': 338, 'when': 555, 'field': 186, 'interested': 238, 'you': 570, 'nw': 349, 'francisco': 205, 'kinds': 253, 'monday': 317, "o'clock": 350, 'kansas': 251, 'june': 249, 'lufthansa': 289, 'meaning': 305, "'d": 0, 'reservation': 403, "'m": 2, 'friends': 207, 'meals': 303, 'land': 257, 'daily': 127, 'departs': 140, 'missouri': 315, 'starting': 456, 'hello': 223\}
+\{'B-time\_relative': 74, 'B-stoploc.state\_code': 72, 'B-depart\_date.today\_relative': 29, 'B-arrive\_date.date\_relative': 5, 'B-depart\_date.date\_relative': 25, 'I-restriction\_code': 113, 'B-return\_date.month\_name': 62, 'I-time': 120, 'B-depart\_date.day\_name': 26, 'I-arrive\_time.end\_time': 86, 'B-fromloc.airport\_code': 46, 'B-cost\_relative': 21, 'B-connect': 20, 'B-return\_time.period\_mod': 64, 'B-arrive\_time.period\_mod': 11, 'B-flight\_number': 43, 'B-depart\_time.time\_relative': 36, 'I-toloc.city\_name': 123, 'B-arrive\_time.period\_of\_day': 12, 'B-depart\_time.period\_of\_day': 33, 'I-return\_date.date\_relative': 114, 'I-depart\_time.start\_time': 98, 'B-fare\_amount': 38, 'I-depart\_time.time\_relative': 100, 'B-city\_name': 17, 'B-depart\_date.day\_number': 27, 'I-meal\_description': 112, 'I-depart\_date.today\_relative': 95, 'I-airport\_name': 84, 'I-arrive\_date.day\_number': 85, 'B-toloc.state\_code': 80, 'B-arrive\_date.month\_name': 8, 'B-stoploc.airport\_code': 69, 'I-depart\_time.time': 99, 'B-airport\_code': 3, 'B-arrive\_time.start\_time': 13, 'B-period\_of\_day': 57, 'B-arrive\_time.time': 14, 'I-flight\_stop': 106, 'B-toloc.state\_name': 81, 'B-booking\_class': 16, 'I-meal\_code': 111, 'B-arrive\_time.end\_time': 10, 'B-meal': 51, 'B-arrive\_time.time\_relative': 15, 'B-return\_date.day\_number': 61, 'I-city\_name': 91, 'B-day\_name': 22, 'B-or': 56, 'I-flight\_mod': 104, 'I-arrive\_time.time': 89, 'B-economy': 37, 'B-fromloc.airport\_name': 47, 'B-return\_date.day\_name': 60, 'O': 126, 'B-class\_type': 18, 'B-meal\_code': 52, 'B-depart\_time.time': 35, 'B-return\_date.today\_relative': 63, 'B-round\_trip': 66, 'B-restriction\_code': 58, 'B-fare\_basis\_code': 39, 'I-stoploc.city\_name': 119, 'I-fare\_basis\_code': 103, 'B-flight': 40, 'I-fromloc.airport\_name': 108, 'B-compartment': 19, 'B-airline\_code': 1, 'B-fromloc.state\_name': 50, 'B-flight\_stop': 44, 'B-day\_number': 23, 'B-flight\_mod': 42, 'I-arrive\_time.period\_of\_day': 87, 'B-depart\_time.start\_time': 34, 'B-today\_relative': 75, 'I-arrive\_time.time\_relative': 90, 'B-arrive\_date.day\_number': 7, 'I-flight\_time': 107, 'B-arrive\_date.day\_name': 6, 'I-fromloc.state\_name': 110, 'B-mod': 54, 'B-depart\_date.month\_name': 28, 'B-flight\_days': 41, 'I-cost\_relative': 93, 'B-stoploc.airport\_name': 70, 'I-today\_relative': 121, 'B-fromloc.city\_name': 48, 'B-transport\_type': 82, 'B-return\_time.period\_of\_day': 65, 'B-time': 73, 'B-toloc.country\_name': 79, 'B-return\_date.date\_relative': 59, 'I-depart\_date.day\_number': 94, 'I-transport\_type': 125, 'I-fromloc.city\_name': 109, 'B-depart\_date.year': 30, 'I-return\_date.day\_number': 115, 'B-flight\_time': 45, 'B-toloc.city\_name': 78, 'B-depart\_time.period\_mod': 32, 'I-arrive\_time.start\_time': 88, 'B-state\_code': 67, 'B-airport\_name': 4, 'B-stoploc.city\_name': 71, 'I-toloc.airport\_name': 122, 'B-meal\_description': 53, 'I-class\_type': 92, 'B-toloc.airport\_code': 76, 'I-depart\_time.period\_of\_day': 97, 'I-toloc.state\_name': 124, 'B-days\_code': 24, 'B-toloc.airport\_name': 77, 'B-arrive\_date.today\_relative': 9, 'I-round\_trip': 117, 'I-state\_name': 118, 'I-fare\_amount': 102, 'B-airline\_name': 2, 'I-flight\_number': 105, 'I-airline\_name': 83, 'B-state\_name': 68, 'I-economy': 101, 'B-depart\_time.end\_time': 31, 'B-aircraft\_code': 0, 'I-return\_date.today\_relative': 116, 'B-month\_name': 55, 'B-fromloc.state\_code': 49, 'I-depart\_time.end\_time': 96\}
+--------------------------------
+\{32: 'all', 110: 'coach', 102: 'cincinnati', 374: 'people', 318: 'month', 202: 'four', 111: 'code', 213: 'go', 439: 'show', 496: 'thursday', 502: 'to', 405: 'restriction', 151: 'dinnertime', 529: 'under', 450: 'sorry', 235: 'include', 311: 'midwest', 564: 'worth', 451: 'southwest', 301: 'me', 408: 'returning', 181: 'far', 539: 'vegas', 24: 'airfare', 498: 'ticket', 148: 'difference', 54: 'arrange', 499: 'tickets', 286: 'louis', 99: 'cheapest', 276: 'list', 546: 'wednesday', 268: 'leave', 222: 'heading', 474: 'ten', 152: 'direct', 520: 'turboprop', 395: 'rate', 121: 'cost', 392: 'quebec', 266: 'layover', 22: 'air', 554: 'what', 454: 'stands', 100: 'chicago', 419: 'schedule', 510: 'transcontinental', 214: 'goes', 332: 'new', 512: 'transportation', 225: 'here', 228: 'hours', 272: 'let', 523: 'twentieth', 33: 'along', 494: 'thrift', 371: 'passengers', 216: 'great', 490: 'thirty', 91: 'canadian', 269: 'leaves', 31: 'alaska', 270: 'leaving', 38: 'amount', 549: 'weekday', 294: 'makes', 310: 'midway', 319: 'montreal', 541: 'via', 138: 'depart', 124: 'county', 327: 'names', 453: 'stand', 507: 'total', 434: 'seventeenth', 533: 'use', 521: 'twa', 208: 'from', 565: 'would', 15: 'abbreviations', 144: 'destination', 360: 'only', 334: 'next', 278: 'live', 437: 'shortest', 275: 'limousine', 473: 'tell', 503: 'today', 320: 'more', 8: 'DIGIT', 292: 'm80', 159: 'downtown', 509: 'train', 471: 'tampa', 196: 'fly', 179: 'f', 491: 'this', 93: 'car', 44: 'anywhere', 89: 'can', 199: 'following', 295: 'making', 58: 'arrive', 325: 'my', 123: 'could', 212: 'give', 134: 'december', 348: 'numbers', 542: 'want', 12: 'DIGITDIGITDIGITDIGITDIGITDIGIT', 27: 'airplane', 501: 'times', 237: 'information', 466: 'tacoma', 388: 'provide', 513: 'travel', 440: 'six', 150: 'dinner', 280: 'located', 463: 'sunday', 204: 'fourth', 527: 'types', 71: 'beach', 339: 'nonstop', 168: 'economy', 182: 'fare', 357: 'okay', 566: 'y', 299: 'may', 164: 'earlier', 381: 'plane', 185: 'ff', 115: 'coming', 171: 'eighth', 198: 'fn', 260: 'las', 13: 'a', 74: 'boeing', 487: 'third', 141: 'departure', 390: 'q', 446: 'so', 400: 'rentals', 229: 'houston', 433: 'serving', 224: 'help', 426: 'september', 370: 'over', 309: 'midnight', 449: 'soon', 281: 'logan', 495: 'through', 312: 'milwaukee', 457: 'still', 72: 'before', 489: 'thirtieth', 479: 'thank', 191: 'fit', 230: 'how', 517: 'trying', 137: 'denver', 18: 'actually', 263: 'late', 355: 'offers', 277: 'listing', 477: 'texas', 11: 'DIGITDIGITDIGITDIGIT', 483: 'then', 174: 'evening', 407: 'return', 568: 'yn', 290: 'lunch', 547: 'wednesdays', 486: 'they', 60: 'arriving', 346: 'now', 399: 'rental', 130: 'day', 259: 'landings', 184: 'february', 30: 'airports', 326: 'name', 464: 'sundays', 244: 'january', 145: 'detroit', 163: 'each', 302: 'meal', 160: 'dulles', 375: 'petersburg', 488: 'thirteenth', 162: 'ea', 534: 'used', 59: 'arrives', 116: 'connect', 402: 'requesting', 476: 'tenth', 416: 'saturday', 369: 'out', 90: 'canada', 284: 'looking', 52: 'arizona', 96: 'cars', 206: 'friday', 435: 'seventh', 88: 'california', 569: 'york', 85: 'bwi', 364: 'ord', 165: 'earliest', 401: 'repeat', 133: 'dc10', 63: 'atl', 195: 'florida', 131: 'days', 410: 'round', 37: 'american', 20: 'afternoon', 452: 'st.', 190: 'first', 484: 'there', 347: 'number', 359: 'one', 173: 'eleventh', 48: 'approximately', 42: 'another', 504: 'tomorrow', 7: '<UNK>', 104: 'city', 430: 'service', 524: 'twenty', 146: 'dfw', 550: 'weekdays', 267: 'least', 482: 'their', 396: 'rates', 10: 'DIGITDIGITDIGIT', 500: 'time', 505: 'too', 442: 'sixteenth', 480: 'that', 379: 'pittsburgh', 427: 'serve', 248: 'july', 478: 'than', 506: 'toronto', 154: 'distance', 252: 'kind', 67: 'b', 424: 'second', 373: 'pennsylvania', 106: 'classes', 368: 'other', 514: 'traveling', 40: 'and', 97: 'charlotte', 415: 'san', 460: 'stopovers', 77: 'boston', 468: 'takeoff', 418: 'say', 84: 'buy', 398: 'rent', 221: 'have', 331: 'need', 80: 'breakfast', 377: 'philly', 43: 'any', 412: 'sa', 128: 'dallas', 34: 'also', 563: 'without', 467: 'take', 557: 'which', 465: 'sure', 386: 'price', 558: 'who', 431: 'serviced', 323: 'most', 169: 'eight', 258: 'landing', 432: 'services', 36: 'america', 105: 'class', 264: 'later', 291: 'm', 336: 'nineteenth', 413: 'salt', 139: 'departing', 98: 'cheap', 519: 'tuesdays', 189: 'find', 188: 'fifth', 217: 'ground', 445: 'snack', 561: 'with', 177: 'explain', 314: 'minnesota', 438: 'should', 194: 'flights', 215: 'going', 394: 'qx', 94: 'carolina', 156: 'do', 155: 'dl', 211: 'get', 308: 'michigan', 178: 'express', 458: 'stop', 132: 'dc', 239: 'international', 161: 'during', 553: 'westchester', 393: 'qw', 455: 'stapleton', 219: 'h', 321: 'morning', 560: 'wish', 356: 'ohio', 556: 'where', 391: 'qo', 56: 'arrival', 170: 'eighteenth', 531: 'up', 119: 'connections', 425: 'see', 50: 'are', 108: 'close', 567: 'yes', 92: 'capacity', 383: 'please', 444: 'smallest', 538: 'various', 73: 'between', 180: 'f28', 66: 'available', 545: 'we', 65: 'august', 411: 's', 328: 'nashville', 23: 'aircraft', 187: 'fifteenth', 103: 'cities', 246: 'jfk', 78: 'both', 87: 'c', 261: 'last', 296: 'many', 470: 'taking', 255: 'la', 516: 'trips', 49: 'april', 118: 'connection', 69: 'baltimore', 192: 'flies', 109: 'co', 518: 'tuesday', 340: 'nonstops', 475: 'tennessee', 459: 'stopover', 125: 'cp', 345: 'november', 176: 'expensive', 552: 'west', 26: 'airlines', 329: 'nationair', 324: 'much', 135: 'define', 300: 'mco', 193: 'flight', 167: 'eastern', 28: 'airplanes', 279: 'lives', 387: 'prices', 64: 'atlanta', 39: 'an', 492: 'those', 436: 'sfo', 210: 'georgia', 283: 'look', 485: 'these', 365: 'originate', 101: 'choices', 559: 'will', 330: 'near', 243: 'itinerary', 461: 'stopping', 316: 'mitchell', 203: 'fourteenth', 497: 'thursdays', 241: 'is', 242: 'it', 55: 'arrangements', 234: 'in', 423: 'seattle', 233: 'if', 149: 'different', 293: 'make', 29: 'airport', 414: 'same', 344: 'northwest', 175: 'ewr', 522: 'twelfth', 548: 'week', 236: 'indianapolis', 147: 'diego', 469: 'takeoffs', 535: 'uses', 525: 'two', 129: 'database', 232: 'i', 551: 'well', 362: 'options', 122: 'costs', 245: 'jersey', 540: 'very', 481: 'the', 265: 'latest', 472: 'taxi', 250: 'just', 271: 'less', 337: 'ninth', 14: 'abbreviation', 422: 'seats', 287: 'love', 372: 'paul', 247: 'jose', 441: 'sixteen', 256: 'lake', 75: 'book', 47: 'ap80', 183: 'fares', 220: 'has', 297: 'march', 53: 'around', 537: 'utah', 385: 'possible', 166: 'early', 254: 'know', 420: 'schedules', 536: 'using', 273: 'like', 126: 'd', 307: 'miami', 367: 'orlando', 57: 'arrivals', 172: 'either', 335: 'night', 428: 'served', 508: 'tower', 274: 'limo', 421: 'seating', 409: 'right', 417: 'saturdays', 262: 'lastest', 447: 'some', 68: 'back', 5: "'t", 429: 'serves', 107: 'cleveland', 4: "'s", 511: 'transport', 389: 'provided', 351: 'oakland', 378: 'phoenix', 200: 'for', 341: 'noon', 462: 'stops', 333: 'newark', 157: 'does', 117: 'connecting', 76: 'booking', 70: 'be', 114: 'columbus', 82: 'business', 397: 'reaching', 443: 'sixth', 142: 'departures', 46: 'ap57', 86: 'by', 19: 'after', 358: 'on', 16: 'about', 342: 'noontime', 9: 'DIGITDIGIT', 353: 'of', 158: 'dollars', 81: 'burbank', 41: 'angeles', 95: 'carries', 25: 'airline', 304: 'mean', 363: 'or', 380: 'plan', 113: 'colorado', 530: 'united', 240: 'into', 562: 'within', 543: 'washington', 79: 'bound', 493: 'three', 571: 'your', 218: 'guardia', 361: 'ontario', 51: 'area', 197: 'flying', 376: 'philadelphia', 282: 'long', 120: 'continental', 285: 'los', 6: '72s', 544: 'way', 288: 'lowest', 322: 'mornings', 343: 'north', 354: 'offer', 231: 'hp', 406: 'restrictions', 83: 'but', 226: 'hi', 136: 'delta', 227: 'highest', 306: 'memphis', 201: 'fort', 352: 'october', 526: 'type', 298: 'maximum', 532: 'us', 3: "'re", 382: 'planes', 384: 'pm', 528: 'ua', 153: 'display', 366: 'originating', 17: 'ac', 404: 'reservations', 143: 'describe', 35: 'am', 313: 'minneapolis', 209: 'general', 45: 'ap', 61: 'as', 448: 'sometime', 62: 'at', 515: 'trip', 21: 'again', 112: 'codes', 1: "'ll", 338: 'no', 555: 'when', 186: 'field', 238: 'interested', 570: 'you', 349: 'nw', 205: 'francisco', 253: 'kinds', 317: 'monday', 350: "o'clock", 251: 'kansas', 249: 'june', 289: 'lufthansa', 305: 'meaning', 0: "'d", 403: 'reservation', 2: "'m", 207: 'friends', 303: 'meals', 257: 'land', 127: 'daily', 140: 'departs', 315: 'missouri', 456: 'starting', 223: 'hello'\}
+\{74: 'B-time\_relative', 72: 'B-stoploc.state\_code', 29: 'B-depart\_date.today\_relative', 5: 'B-arrive\_date.date\_relative', 25: 'B-depart\_date.date\_relative', 113: 'I-restriction\_code', 62: 'B-return\_date.month\_name', 120: 'I-time', 26: 'B-depart\_date.day\_name', 86: 'I-arrive\_time.end\_time', 46: 'B-fromloc.airport\_code', 21: 'B-cost\_relative', 20: 'B-connect', 64: 'B-return\_time.period\_mod', 11: 'B-arrive\_time.period\_mod', 43: 'B-flight\_number', 36: 'B-depart\_time.time\_relative', 123: 'I-toloc.city\_name', 12: 'B-arrive\_time.period\_of\_day', 33: 'B-depart\_time.period\_of\_day', 114: 'I-return\_date.date\_relative', 98: 'I-depart\_time.start\_time', 38: 'B-fare\_amount', 100: 'I-depart\_time.time\_relative', 17: 'B-city\_name', 27: 'B-depart\_date.day\_number', 112: 'I-meal\_description', 95: 'I-depart\_date.today\_relative', 84: 'I-airport\_name', 85: 'I-arrive\_date.day\_number', 80: 'B-toloc.state\_code', 8: 'B-arrive\_date.month\_name', 69: 'B-stoploc.airport\_code', 99: 'I-depart\_time.time', 3: 'B-airport\_code', 13: 'B-arrive\_time.start\_time', 57: 'B-period\_of\_day', 14: 'B-arrive\_time.time', 106: 'I-flight\_stop', 81: 'B-toloc.state\_name', 16: 'B-booking\_class', 111: 'I-meal\_code', 10: 'B-arrive\_time.end\_time', 51: 'B-meal', 15: 'B-arrive\_time.time\_relative', 61: 'B-return\_date.day\_number', 91: 'I-city\_name', 22: 'B-day\_name', 56: 'B-or', 104: 'I-flight\_mod', 89: 'I-arrive\_time.time', 37: 'B-economy', 47: 'B-fromloc.airport\_name', 60: 'B-return\_date.day\_name', 126: 'O', 18: 'B-class\_type', 52: 'B-meal\_code', 35: 'B-depart\_time.time', 63: 'B-return\_date.today\_relative', 66: 'B-round\_trip', 58: 'B-restriction\_code', 39: 'B-fare\_basis\_code', 119: 'I-stoploc.city\_name', 103: 'I-fare\_basis\_code', 40: 'B-flight', 108: 'I-fromloc.airport\_name', 19: 'B-compartment', 1: 'B-airline\_code', 50: 'B-fromloc.state\_name', 44: 'B-flight\_stop', 23: 'B-day\_number', 42: 'B-flight\_mod', 87: 'I-arrive\_time.period\_of\_day', 34: 'B-depart\_time.start\_time', 75: 'B-today\_relative', 90: 'I-arrive\_time.time\_relative', 7: 'B-arrive\_date.day\_number', 107: 'I-flight\_time', 6: 'B-arrive\_date.day\_name', 110: 'I-fromloc.state\_name', 54: 'B-mod', 28: 'B-depart\_date.month\_name', 41: 'B-flight\_days', 93: 'I-cost\_relative', 70: 'B-stoploc.airport\_name', 121: 'I-today\_relative', 48: 'B-fromloc.city\_name', 82: 'B-transport\_type', 65: 'B-return\_time.period\_of\_day', 73: 'B-time', 79: 'B-toloc.country\_name', 59: 'B-return\_date.date\_relative', 94: 'I-depart\_date.day\_number', 125: 'I-transport\_type', 109: 'I-fromloc.city\_name', 30: 'B-depart\_date.year', 115: 'I-return\_date.day\_number', 45: 'B-flight\_time', 78: 'B-toloc.city\_name', 32: 'B-depart\_time.period\_mod', 88: 'I-arrive\_time.start\_time', 67: 'B-state\_code', 4: 'B-airport\_name', 71: 'B-stoploc.city\_name', 122: 'I-toloc.airport\_name', 53: 'B-meal\_description', 92: 'I-class\_type', 76: 'B-toloc.airport\_code', 97: 'I-depart\_time.period\_of\_day', 124: 'I-toloc.state\_name', 24: 'B-days\_code', 77: 'B-toloc.airport\_name', 9: 'B-arrive\_date.today\_relative', 117: 'I-round\_trip', 118: 'I-state\_name', 102: 'I-fare\_amount', 2: 'B-airline\_name', 105: 'I-flight\_number', 83: 'I-airline\_name', 68: 'B-state\_name', 101: 'I-economy', 31: 'B-depart\_time.end\_time', 0: 'B-aircraft\_code', 116: 'I-return\_date.today\_relative', 55: 'B-month\_name', 49: 'B-fromloc.state\_code', 96: 'I-depart\_time.end\_time'\}
+--------------------------
+-------------------------
+['what', 'is', 'the', 'arrival', 'time', 'in', 'san', 'francisco', 'for', 'the', 'DIGITDIGITDIGIT', 'am', 'flight', 'leaving', 'washington']
+['O', 'O', 'O', 'B-flight\_time', 'I-flight\_time', 'O', 'B-fromloc.city\_name', 'I-fromloc.city\_name', 'O', 'O', 'B-depart\_time.time', 'I-depart\_time.time', 'O', 'O', 'B-fromloc.city\_name']
+------------------------
+-------------------------
+--------------------------
+['what', 'are', 'the', 'nonstop', 'flights', 'from', 'cincinnati', 'to', 'charlotte', 'leaving', 'after', 'noon', 'and', 'arriving', 'before', 'DIGIT', 'pm']
+['O', 'B-depart\_date.month\_name', 'B-depart\_date.day\_number', 'O', 'O', 'O', 'O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name', 'I-toloc.city\_name']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Example sentence : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{words\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Encoded form: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s label : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{labels\PYZus{}train}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Encoded form: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train\PYZus{}label}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Example sentence : ['i', 'want', 'to', 'fly', 'from', 'boston', 'at', 'DIGITDIGITDIGIT', 'am', 'and', 'arrive', 'in', 'denver', 'at', 'DIGITDIGITDIGITDIGIT', 'in', 'the', 'morning']
+Encoded form: [232 542 502 196 208  77  62  10  35  40  58 234 137  62  11 234 481 321]
+
+It's label : ['O', 'O', 'O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-depart\_time.time', 'I-depart\_time.time', 'O', 'O', 'O', 'B-toloc.city\_name', 'O', 'B-arrive\_time.time', 'O', 'O', 'B-arrive\_time.period\_of\_day']
+Encoded form: [126 126 126 126 126  48 126  35  99 126 126 126  78 126  14 126 126  12]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{embeddings} \PY{k}{import} \PY{n}{Embedding}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{recurrent} \PY{k}{import} \PY{n}{SimpleRNN}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{core} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Dropout}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{wrappers} \PY{k}{import} \PY{n}{TimeDistributed}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Convolution1D}\PY{p}{,} \PY{n}{GRU}
+        
+        \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Embedding}\PY{p}{(}\PY{n}{n\PYZus{}vocab}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Convolution1D}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{border\PYZus{}mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{GRU}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{TimeDistributed}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rmsprop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+/usr/local/lib/python3.6/site-packages/ipykernel\_launcher.py:10: UserWarning: Update your `Conv1D` call to the Keras 2 API: `Conv1D(128, 5, activation="relu", padding="same")`
+  \# Remove the CWD from sys.path while we load stuff.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+WARNING:tensorflow:From /usr/local/lib/python3.6/site-packages/tensorflow/python/util/deprecation.py:497: calling conv1d (from tensorflow.python.ops.nn\_ops) with data\_format=NHWC is deprecated and will be removed in a future version.
+Instructions for updating:
+`NHWC` for data\_format is deprecated, use `NWC` instead
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{progressbar}
+        \PY{n}{n\PYZus{}epochs} \PY{o}{=} \PY{l+m+mi}{30}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}epochs}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training epoch }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+            
+            \PY{n}{bar} \PY{o}{=} \PY{n}{progressbar}\PY{o}{.}\PY{n}{ProgressBar}\PY{p}{(}\PY{n}{maxval}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{n\PYZus{}batch}\PY{p}{,} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{bar}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{label} \PY{o}{=} \PY{n}{train\PYZus{}label}\PY{p}{[}\PY{n}{n\PYZus{}batch}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{} Make labels one hot}
+                \PY{n}{label} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,}\PY{p}{:}\PY{p}{]} 
+                \PY{c+c1}{\PYZsh{} View each sentence as a batch}
+                \PY{n}{sent} \PY{o}{=} \PY{n}{sent}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+                
+                \PY{k}{if} \PY{n}{sent}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{:} \PY{c+c1}{\PYZsh{}ignore 1 word sentences}
+                    \PY{n}{model}\PY{o}{.}\PY{n}{train\PYZus{}on\PYZus{}batch}\PY{p}{(}\PY{n}{sent}\PY{p}{,} \PY{n}{label}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 2
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 3
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 5
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 6
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 7
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 8
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 9
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 10
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 11
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 12
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 13
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 14
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 15
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 16
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 17
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 18
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 19
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 20
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 21
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 22
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 23
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 24
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 25
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 26
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 27
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 28
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+  0\% |                                                                        |
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training epoch 29
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{metrics}\PY{n+nn}{.}\PY{n+nn}{accuracy} \PY{k}{import} \PY{n}{conlleval}
+        
+        \PY{n}{labels\PYZus{}pred\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{n}{bar} \PY{o}{=} \PY{n}{progressbar}\PY{o}{.}\PY{n}{ProgressBar}\PY{p}{(}\PY{n}{maxval}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{val\PYZus{}x}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{n\PYZus{}batch}\PY{p}{,} \PY{n}{sent} \PY{o+ow}{in} \PY{n}{bar}\PY{p}{(}\PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{val\PYZus{}x}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{label} \PY{o}{=} \PY{n}{val\PYZus{}label}\PY{p}{[}\PY{n}{n\PYZus{}batch}\PY{p}{]}
+            \PY{n}{label} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{n\PYZus{}classes}\PY{p}{)}\PY{p}{[}\PY{n}{label}\PY{p}{]}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+            \PY{n}{sent} \PY{o}{=} \PY{n}{sent}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        
+            \PY{n}{pred} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict\PYZus{}on\PYZus{}batch}\PY{p}{(}\PY{n}{sent}\PY{p}{)}
+            \PY{n}{pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{pred}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{labels\PYZus{}pred\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+        
+        \PY{n}{labels\PYZus{}pred\PYZus{}val} \PY{o}{=} \PY{p}{[} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{idx2la}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{)} \PYZbs{}
+                                            \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n}{labels\PYZus{}pred\PYZus{}val}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Predictions, Ground Truths, Corresponding Words, Name of the files where the predictions are made.}
+        \PY{n}{con\PYZus{}dict} \PY{o}{=} \PY{n}{conlleval}\PY{p}{(}\PY{n}{labels\PYZus{}pred\PYZus{}val}\PY{p}{,} \PY{n}{labels\PYZus{}val}\PY{p}{,} 
+                                    \PY{n}{words\PYZus{}val}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{measure.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, Recall = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, F1 = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                    \PY{n}{con\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{con\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{con\PYZus{}dict}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\% |\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#|
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision = 93.97, Recall = 94.74, F1 = 94.35
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Example sentence : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{words\PYZus{}train}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Encoded form: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train\PYZus{}x}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s label : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{labels\PYZus{}train}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Encoded form: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train\PYZus{}label}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Example sentence : ['i', 'want', 'to', 'fly', 'from', 'boston', 'at', 'DIGITDIGITDIGIT', 'am', 'and', 'arrive', 'in', 'denver', 'at', 'DIGITDIGITDIGITDIGIT', 'in', 'the', 'morning']
+Encoded form: [232 542 502 196 208  77  62  10  35  40  58 234 137  62  11 234 481 321]
+It's label : ['O', 'O', 'O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-depart\_time.time', 'I-depart\_time.time', 'O', 'O', 'O', 'B-toloc.city\_name', 'O', 'B-arrive\_time.time', 'O', 'O', 'B-arrive\_time.period\_of\_day']
+Encoded form: [126 126 126 126 126  48 126  35  99 126 126 126  78 126  14 126 126  12]
+---------------------------------
+Example sentence : ['what', 'flights', 'are', 'available', 'from', 'pittsburgh', 'to', 'baltimore', 'on', 'thursday', 'morning']
+Encoded form: [554 194  50  66 208 379 502  69 358 496 321]
+It's label : ['O', 'O', 'O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name', 'O', 'B-depart\_date.day\_name', 'B-depart\_time.period\_of\_day']
+Encoded form: [126 126 126 126 126  48 126  78 126  26  33]
+---------------------------------
+Example sentence : ['what', 'is', 'the', 'arrival', 'time', 'in', 'san', 'francisco', 'for', 'the', 'DIGITDIGITDIGIT', 'am', 'flight', 'leaving', 'washington']
+Encoded form: [554 241 481  56 500 234 415 205 200 481  10  35 193 270 543]
+It's label : ['O', 'O', 'O', 'B-flight\_time', 'I-flight\_time', 'O', 'B-fromloc.city\_name', 'I-fromloc.city\_name', 'O', 'O', 'B-depart\_time.time', 'I-depart\_time.time', 'O', 'O', 'B-fromloc.city\_name']
+Encoded form: [126 126 126  45 107 126  48 109 126 126  35  99 126 126  48]
+---------------------------------
+Example sentence : ['cheapest', 'airfare', 'from', 'tacoma', 'to', 'orlando']
+Encoded form: [ 99  24 208 466 502 367]
+It's label : ['B-cost\_relative', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name']
+Encoded form: [ 21 126 126  48 126  78]
+---------------------------------
+Example sentence : ['round', 'trip', 'fares', 'from', 'pittsburgh', 'to', 'philadelphia', 'under', 'DIGITDIGITDIGITDIGIT', 'dollars']
+Encoded form: [410 515 183 208 379 502 376 529  11 158]
+It's label : ['B-round\_trip', 'I-round\_trip', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name', 'B-cost\_relative', 'B-fare\_amount', 'I-fare\_amount']
+Encoded form: [ 66 117 126 126  48 126  78  21  38 102]
+---------------------------------
+Example sentence : ['i', 'need', 'a', 'flight', 'tomorrow', 'from', 'columbus', 'to', 'minneapolis']
+Encoded form: [232 331  13 193 504 208 114 502 313]
+It's label : ['O', 'O', 'O', 'O', 'B-depart\_date.today\_relative', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name']
+Encoded form: [126 126 126 126  29 126  48 126  78]
+---------------------------------
+Example sentence : ['what', 'kind', 'of', 'aircraft', 'is', 'used', 'on', 'a', 'flight', 'from', 'cleveland', 'to', 'dallas']
+Encoded form: [554 252 353  23 241 534 358  13 193 208 107 502 128]
+It's label : ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name']
+Encoded form: [126 126 126 126 126 126 126 126 126 126  48 126  78]
+---------------------------------
+Example sentence : ['show', 'me', 'the', 'flights', 'from', 'pittsburgh', 'to', 'los', 'angeles', 'on', 'thursday']
+Encoded form: [439 301 481 194 208 379 502 285  41 358 496]
+It's label : ['O', 'O', 'O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name', 'I-toloc.city\_name', 'O', 'B-depart\_date.day\_name']
+Encoded form: [126 126 126 126 126  48 126  78 123 126  26]
+---------------------------------
+Example sentence : ['all', 'flights', 'from', 'boston', 'to', 'washington']
+Encoded form: [ 32 194 208  77 502 543]
+It's label : ['O', 'O', 'O', 'B-fromloc.city\_name', 'O', 'B-toloc.city\_name']
+Encoded form: [126 126 126  48 126  78]
+---------------------------------
+Example sentence : ['what', 'kind', 'of', 'ground', 'transportation', 'is', 'available', 'in', 'denver']
+Encoded form: [554 252 353 217 512 241  66 234 137]
+It's label : ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-city\_name']
+Encoded form: [126 126 126 126 126 126 126 126  17]
+---------------------------------
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emnlp2017/pkl/sentencesList.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{sentencesList} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emnlp2017/pkl/POS\PYZus{}sentencesList.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{POS\PYZus{}sentencesList} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+         
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emnlp2017/pkl/ent\PYZus{}sentencesList.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{ent\PYZus{}sentencesList} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+         
+             
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{for i in range(0, 10):}
+         \PY{l+s+sd}{    print(POS\PYZus{}sentencesList[i])}
+         \PY{l+s+sd}{    print(sentencesList[i])}
+         \PY{l+s+sd}{    print(ent\PYZus{}sentencesList)}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}} 
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} '\textbackslash{}nfor i in range(0, 10):\textbackslash{}n    print(POS\_sentencesList[i])\textbackslash{}n    print(sentencesList[i])\textbackslash{}n    print(ent\_sentencesList)\textbackslash{}n'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/SAMPLEDATA.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+             \PY{n}{allwords} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/TRAINDATA.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+             \PY{n}{allsentences} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{splitlines}\PY{p}{(}\PY{p}{)}
+         \PY{n}{uniquewords} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{allwords}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{allwords}\PY{o}{.}\PY{n}{index}\PY{p}{)}       
+         \PY{n}{key\PYZus{}phrases} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{uniquewords}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{key\PYZus{}phrases}\PY{p}{[}\PY{n}{uniquewords}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{i}
+         
+         \PY{n}{uniquewords}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:} ['Sloths',
+          'are',
+          'arboreal',
+          'mammals',
+          'noted',
+          'for',
+          'slowness',
+          'of',
+          'movement',
+          'and',
+          'spending',
+          'most',
+          'their',
+          'lives',
+          'hanging',
+          'upside',
+          'down',
+          'in',
+          'the',
+          'trees',
+          'tropical',
+          'rainforests',
+          'South',
+          'America',
+          'Central',
+          'America.',
+          'The',
+          'six',
+          'species',
+          'two',
+          'families:',
+          'two-toed',
+          'sloths',
+          'three-toed',
+          'sloths.',
+          'In',
+          'spite',
+          'this',
+          'traditional',
+          'naming,',
+          'all',
+          'actually',
+          'have',
+          'three',
+          'toes.',
+          'digits,',
+          'or',
+          'fingers,',
+          'on',
+          'each',
+          'forelimb.',
+          'Sloths—the',
+          'adorable',
+          'lethargic',
+          'animals',
+          'living',
+          'treetops—depend',
+          'health',
+          'survival',
+          'American',
+          'forests.',
+          'They',
+          'spend',
+          'much',
+          'canopy,',
+          'snoozing',
+          'remaining',
+          'hidden',
+          'from',
+          'predators.',
+          'live',
+          'solitary',
+          'travel',
+          'tree',
+          'to',
+          'using',
+          'canopy',
+          'vines.',
+          'Located',
+          'places',
+          'such',
+          'as',
+          'Brazil',
+          'Panama,',
+          'strange',
+          'wonderful',
+          'animal',
+          'need',
+          'healthy',
+          'forests',
+          'survive.',
+          'But',
+          'some',
+          'vulnerable',
+          'deforestation.',
+          'Loss',
+          'means',
+          'forced',
+          'smaller',
+          'areas',
+          'land',
+          'that',
+          'can’t',
+          'support',
+          'populations.',
+          'WWF',
+          'works',
+          'with',
+          'communities,',
+          'governments,',
+          'companies',
+          'other',
+          'partners',
+          'protect',
+          'rely',
+          'them.',
+          'Female',
+          'give',
+          'birth',
+          'one',
+          'baby',
+          'a',
+          'year',
+          'after',
+          'gestation',
+          'period',
+          'months.',
+          'sticks',
+          'mother',
+          'about',
+          'months,',
+          'grasping',
+          'its',
+          'mom’s',
+          'belly',
+          'she',
+          'moves',
+          'through',
+          'trees.',
+          'This',
+          'is',
+          'an',
+          'important',
+          'bonding',
+          'helps',
+          'offspring',
+          'learn',
+          'develop.',
+          'When',
+          'sloth',
+          'leaves',
+          'mom',
+          'it',
+          'adopts',
+          'part',
+          'mother’s',
+          'range,',
+          'continuing',
+          'communicate',
+          'parent',
+          'calls.',
+          'snooze',
+          '15',
+          'hours',
+          'per',
+          'day.',
+          'That',
+          'only',
+          'nine',
+          'lumber',
+          'maintain',
+          'low',
+          'body',
+          'temperature',
+          '86°F-93°F',
+          'move',
+          'out',
+          'shade',
+          'regulate',
+          'temperature.',
+          'munch',
+          'leaves,',
+          'twigs',
+          'buds.',
+          'Because',
+          'don’t',
+          'incisors,',
+          'they',
+          'trim',
+          'by',
+          'smacking',
+          'firm',
+          'lips',
+          'together.',
+          'A',
+          'metabolic',
+          'rate',
+          'can',
+          'survive',
+          'relatively',
+          'little',
+          'food;',
+          'takes',
+          'days',
+          'them',
+          'process',
+          'what',
+          'digest',
+          'matter',
+          'hours.',
+          'Though',
+          'not',
+          'endangered,',
+          'threatened',
+          'habitat',
+          'loss.',
+          'Deforestation',
+          'jeopardize',
+          'food',
+          'shelter.',
+          'Through',
+          'program',
+          'called',
+          'ARPA',
+          'Life,',
+          'helped',
+          'government',
+          'create',
+          '\$215',
+          'million',
+          'fund',
+          'ensure',
+          '150',
+          'acres',
+          'Brazilian',
+          'Amazon',
+          'properly',
+          'managed.',
+          'majority',
+          'time',
+          'up',
+          'coming',
+          'week',
+          'relieve',
+          'themselves.',
+          'provide',
+          'natural',
+          'protection',
+          'predators',
+          'jaguars',
+          'eagles;',
+          'it’s',
+          'safer',
+          'remain',
+          'motionless',
+          'camouflaged',
+          'off',
+          'ground.',
+          'will,',
+          'however,',
+          'venture',
+          'rare',
+          'occasions',
+          'find',
+          'more',
+          'mate.',
+          'LOCATION:',
+          'There',
+          'types',
+          'rainforest',
+          'biomes:',
+          'temperate',
+          'rainforests.',
+          'Temperate',
+          'found',
+          'along',
+          'coasts',
+          'regions.',
+          'largest',
+          'Pacific',
+          'coast',
+          'North',
+          'America,',
+          'stretching',
+          'Alaska',
+          'Oregon.',
+          'Other',
+          'Chile,',
+          'United',
+          'Kingdom,',
+          'Norway,',
+          'Japan,',
+          'New',
+          'Zealand,',
+          'S.',
+          'Australia.',
+          'Tropical',
+          'generally',
+          'between',
+          '30°N',
+          '30°S',
+          'latitudes,',
+          'covering',
+          '6',
+          '-',
+          '7\%',
+          'Earth’s',
+          'surface.',
+          'be',
+          'around',
+          'world:',
+          'America;',
+          'Western',
+          'Africa,',
+          'eastern',
+          'Madagascar,',
+          'Zaire',
+          'basin;',
+          'Indo-Malaysia',
+          'west',
+          'India,',
+          'Assam,',
+          'Southeast',
+          'Asia,',
+          'Guinea,',
+          'Queensland,',
+          'WEATHER:',
+          'Rainforests',
+          'because',
+          'help',
+          'global',
+          'weather',
+          'patterns',
+          'rain.',
+          'Water',
+          'evaporates',
+          'falls',
+          'lush',
+          'warm',
+          'long!',
+          'Temperatures',
+          'even',
+          'change',
+          'night',
+          'average',
+          'ranges',
+          '70',
+          '85°F',
+          '(21',
+          '30°C).',
+          'environment',
+          'pretty',
+          'wet',
+          'rainforests,',
+          'maintaining',
+          'high',
+          'humidity',
+          '77\%',
+          '88\%',
+          'year-round.',
+          'yearly',
+          'rainfall',
+          '80',
+          '400',
+          'inches',
+          '(200',
+          '1000',
+          'cm),',
+          'rain',
+          'hard.',
+          'It',
+          'downpour',
+          '2',
+          '(5',
+          'cm)',
+          'hour!',
+          'also',
+          'wet,',
+          'but',
+          'rainy',
+          'rains',
+          '60',
+          '200',
+          '(150',
+          '500',
+          'year,',
+          'while',
+          'moisture',
+          'comes',
+          'coastal',
+          'fog',
+          'lingers',
+          'provides',
+          '7',
+          '12',
+          '(18',
+          '30°C)',
+          'year.',
+          'lot',
+          'cooler',
+          'than',
+          'temperatures',
+          'still',
+          'mild.',
+          'often',
+          'distinct',
+          'seasons:',
+          'long',
+          'winter,',
+          'short',
+          'drier',
+          'summer.',
+          'PLANTS:',
+          'One',
+          'type',
+          'plant',
+          'epiphyte.',
+          'Epiphytes',
+          'plants',
+          'surface',
+          'plants,',
+          'especially',
+          'trunks',
+          'branches.',
+          'grow',
+          'take',
+          'advantage',
+          'sunlight',
+          'canopy.',
+          'common',
+          'epiphytes',
+          'mosses',
+          'ferns,',
+          'there',
+          'many',
+          'kinds',
+          'epiphytes,',
+          'including',
+          'orchids',
+          'bromeliads.',
+          '20,000',
+          'varieties',
+          'rainforest.',
+          '10',
+          '-2',
+          '0',
+          'mostly',
+          'coniferous,',
+          'meaning',
+          'needles.',
+          'Trees',
+          'longer',
+          'humans,',
+          'years!',
+          'bigger',
+          'variety',
+          'trees,',
+          'hundreds',
+          'fact!',
+          'These',
+          'broadleaf',
+          'shorter',
+          'lifespan.',
+          'usually',
+          '50',
+          '100',
+          'years.',
+          'Most',
+          'thin,',
+          'smooth',
+          'bark.',
+          'thick',
+          'bark',
+          'keep',
+          'drying',
+          'so',
+          'wet.',
+          'Also,',
+          'makes',
+          'difficult',
+          'buttresses,',
+          'large',
+          'branching',
+          'ridges',
+          'near',
+          'base,',
+          'roots',
+          'shallow',
+          'tall',
+          'reach',
+          'sunlight.',
+          'Prop',
+          'soils.',
+          'Many',
+          'adapted',
+          'leaf',
+          'shapes',
+          'water',
+          'drip',
+          'avoid',
+          'too',
+          'moisture,',
+          'which',
+          'might',
+          'make',
+          'bacteria',
+          'fungus',
+          'grow.',
+          'big',
+          'divided',
+          'into',
+          'four',
+          'zones.',
+          'top',
+          'layer',
+          'emergent',
+          'layer.',
+          'Giant',
+          'here',
+          'taller',
+          'below.',
+          'next',
+          'contains',
+          'standing',
+          'feet',
+          '45',
+          'meters)',
+          'tall.',
+          'Their',
+          'branches',
+          'form',
+          'like',
+          'beach',
+          'umbrella',
+          'shades',
+          'forest',
+          'floor.',
+          'Thick,',
+          'woody',
+          'vines',
+          'Over',
+          '2,500',
+          'Some',
+          'vines,',
+          'lianas,',
+          'sometimes',
+          'person!',
+          'climb',
+          'layer,',
+          'understory,',
+          'dark,',
+          'cool',
+          'area',
+          'below',
+          'above',
+          'understory',
+          'shaded',
+          'floor',
+          'bottom',
+          'where',
+          'fallen,',
+          'decomposing',
+          'lay',
+          'insects',
+          'here.',
+          'these',
+          'zones',
+          'except',
+          'tallest',
+          '300',
+          '(90',
+          'ANIMALS:',
+          'home',
+          'half',
+          'Earth.',
+          'Scientists',
+          'believe',
+          'great',
+          'diversity',
+          'oldest',
+          'ecosystems',
+          'earth.',
+          'Asia',
+          'been',
+          'at',
+          'least',
+          'years,',
+          'ever',
+          'since',
+          'dinosaurs',
+          'roamed',
+          'Animals',
+          'specially',
+          'unique',
+          'environment.',
+          'characteristic',
+          'among',
+          'mammals,',
+          'birds,',
+          'reptiles',
+          'amphibians,',
+          'adaptation',
+          'example',
+          'World',
+          'monkeys',
+          'prehensile',
+          'tails',
+          'curl',
+          'allowing',
+          'monkey',
+          'hold',
+          'onto',
+          'tail!',
+          'brightly',
+          'colored,',
+          'sharply',
+          'patterned,',
+          'loud',
+          'vocalizations,',
+          'eat',
+          'lots',
+          'fruit.',
+          'available',
+          'never',
+          'go',
+          'explore',
+          'floor!',
+          'Birds',
+          'seeds',
+          'droppings',
+          'new',
+          'turn,',
+          'birds',
+          'winter',
+          'grounds',
+          'migratory',
+          'destination.',
+          'Parrots',
+          'you',
+          'will',
+          'see',
+          'fact,',
+          '27\%',
+          'bird',
+          'world',
+          'Insects',
+          'single',
+          'group',
+          'include',
+          'bright',
+          'beautiful',
+          'butterflies,',
+          'menacing',
+          'mosquitoes,',
+          'stick',
+          'insects,',
+          'colossal',
+          'colonies',
+          'ants.',
+          'you’ll',
+          'different',
+          'set',
+          'amazing',
+          'animals.',
+          'on,',
+          'protected',
+          'wind',
+          'above.',
+          'small',
+          'chipmunks,',
+          'fall',
+          'Lots',
+          'bark,',
+          'dead',
+          'matter,',
+          'mossy',
+          'areas.',
+          'amphibians',
+          'insects.',
+          'deer',
+          'bobcats.',
+          'Cougars',
+          'bobcats',
+          'biome.',
+          'PEOPLE',
+          'AND',
+          'THE',
+          'RAINFOREST:',
+          'oxygen,',
+          'carbon',
+          'dioxide,',
+          'huge',
+          'source',
+          'biodiversity',
+          'cultural',
+          'diversity.',
+          'However,',
+          'people',
+          'food,',
+          'medicine,',
+          'timber,',
+          'travel,',
+          'more.',
+          'spices,',
+          'example,',
+          'allspice,',
+          'vanilla,',
+          'cacao,',
+          'cassava,',
+          'ginger,',
+          'bananas,',
+          'black',
+          'pepper,',
+          'sugar',
+          'cane,',
+          'nutmeg',
+          'moving',
+          'crowded',
+          'cities',
+          'cannot',
+          'jobs',
+          'becoming',
+          'small-scale',
+          'farmers.',
+          'With',
+          'use,',
+          'we',
+          'concerned',
+          'stress',
+          'putting',
+          'Thirty',
+          'cut',
+          'every',
+          'minute!',
+          'scientists',
+          'estimate',
+          'size',
+          'Pennsylvania',
+          'lost',
+          'causes',
+          'People',
+          'logging',
+          'firewood,',
+          'charcoal,',
+          'building',
+          'materials',
+          'uses.',
+          'being',
+          'removed',
+          'commercial',
+          'agriculture,',
+          'may',
+          'cause',
+          'permanent',
+          'damage.',
+          'Converting',
+          'pasture',
+          'cattle',
+          'ranching',
+          'has',
+          'destroyed',
+          'Mining',
+          'gold,',
+          'bauxite,',
+          'minerals',
+          'destroy',
+          'land,',
+          'erosion.',
+          'What',
+          'do',
+          'our',
+          'world’s',
+          'rainforests?',
+          'way',
+          'start',
+          'helping',
+          'people,',
+          'well',
+          'issues',
+          'surrounding',
+          'issues,',
+          'write',
+          'letters',
+          'governmental',
+          'officials',
+          'newspaper',
+          'suggesting',
+          'ways',
+          'solve',
+          'problem.',
+          'Practice',
+          'conservation',
+          'home.',
+          'reduce',
+          'use',
+          'over',
+          'world.',
+          'Bauxite',
+          'mineral',
+          'used',
+          'aluminum.',
+          'By',
+          'recycling,',
+          'mined',
+          'Pets',
+          'countries',
+          'taken',
+          'wild',
+          'imported',
+          'illegally',
+          'countries.',
+          'If',
+          'buy',
+          'pets',
+          'captively',
+          'bred',
+          'States,',
+          'sure',
+          'didn’t',
+          'come',
+          'rainforest,',
+          'another',
+          'Investigate',
+          'wood',
+          'your',
+          'furniture',
+          'from,',
+          'if',
+          'was',
+          'harvested',
+          'sustainably.',
+          'All',
+          'actions']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{k+kn}{from} \PY{n+nn}{textblob} \PY{k}{import} \PY{n}{TextBlob}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{sentencesTags} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{allsentences}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sentenceTB} \PY{o}{=} \PY{n}{TextBlob}\PY{p}{(}\PY{n}{allsentences}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{sentenceTag} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{sentenceTB}\PY{o}{.}\PY{n}{tags}\PY{p}{:}
+                 \PY{n}{sentenceTag}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{j}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{sentencesTags}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{sentenceTag}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

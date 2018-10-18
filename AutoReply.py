@@ -18,7 +18,7 @@ sys.path.insert(0, 'Intentdetector')
 
 def writeData(ticketsIDs):
 
-	web_emailsDict_path = 'pkl/ticketsReplied.pkl'
+	web_emailsDict_path = 'G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/pkl/ticketsReplied.pkl'
 
 	with open('pkl/ticketsReplied.pkl','wb') as f:
 		pickle.dump(ticketsIDs, f)
@@ -46,7 +46,7 @@ def appendIDToData(newID):
 
 def replyAutomatically(emailData, ticketID, emailNumber, imap_service, smtp_service, user):
 	print("replying automatically to email: ", ticketID)
-	print(emailData)
+	# print(emailData)
 	global imap
 	global smtp
 	global username

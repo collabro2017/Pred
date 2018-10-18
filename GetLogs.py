@@ -19,15 +19,25 @@ logs_file = "G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/logs.txt"
 
 while(True):
 
+	isExc = False
+
 	# Checks whether the file exists or is empty
 	if not os.path.exists(logs_file) or os.stat(logs_file).st_size == 0:
-		logs += subprocess.run([sys.executable,'getEmails.py'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.decode('utf-8')
+		# try:
+		logs += subprocess.run([sys.executable,'getEmails.py'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.decode('utf-8','ignore')
+		# except Exception as e:
+			# logs += str(e)
+
 		logs = getReversedLines(logs)
 
 		with open(logs_file, "w") as f:
 			f.write(logs)
 	else:
-		logs = subprocess.run([sys.executable,'getEmails.py'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.decode('utf-8')
+		# try:
+		logs = subprocess.run([sys.executable,'getEmails.py'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.decode('utf-8','ignore')
+		# except Exception as e:
+		# logs = str(e)
+
 		logs = getReversedLines(logs)
 
 		# Prepending new log to file: 

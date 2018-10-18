@@ -20,6 +20,8 @@ import AutoReply as autoRep
 
 def isImportantEmail(email):
     print("Checking if the email is worth replying")
+    print(email["Subject"])
+
 
     Main.main(username, password)
     isAutomated = []
@@ -40,6 +42,10 @@ def isImportantEmail(email):
     shouldReply = shouldReply[1:] 
     isAutomated = isAutomated[1:]
     isInterrogative = isInterrogative[1:]
+
+    print("shouldReply = ", shouldReply[0])
+    print("isAutomated = ", isAutomated[0])
+    print("isInterrogative = ", isInterrogative[0])
 
     if shouldReply[0] == "1" or (isAutomated[0] == "0" and isInterrogative[0].upper() == "TRUE"):
         print("Should reply to this email\n\n")
@@ -73,12 +79,16 @@ def extract_text( email_message_instance):
         for part in email_message_instance.get_payload():
             if part.get_content_maintype() == 'text':
                 message = message + part.get_payload()
+                break
+
     elif maintype == 'text':
         message = message + email_message_instance.get_payload()
+
     return message
 
 def parseEmail(emailString):
     message = em.message_from_string(emailString)
+
     
     mail={}
     mail["From"]=em.utils.parseaddr(message['From'])[1]
@@ -193,6 +203,8 @@ def checkNewMail(username, password):
 
     for i in range(0, len(inboxEmails)):
         if(inboxEmails[i]["Message-ID"] != emailsDict[0]['email']['Message-ID']):
+            if i > 0:
+                print("--------------------------------------------------------------------------------")
             print("There are new emails in the inbox")
             newEmailsInInbox = True
             newEmails.append(inboxEmails[i])
@@ -302,7 +314,7 @@ def main(username,password):
 
 
 
-web_emailsDict_path = 'pkl/emailsDict.pkl'
+web_emailsDict_path = 'G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/pkl/emailsDict.pkl'
 
 imap = imaplib.IMAP4_SSL('imap.gmail.com',993)
 smtp = smtplib.SMTP_SSL('smtp.gmail.com')
