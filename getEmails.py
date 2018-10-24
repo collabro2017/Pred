@@ -19,6 +19,9 @@ import AutoReply as autoRep
 
 
 def isImportantEmail(email):
+
+    change_web_status("Analyzing new Email")
+    
     print("Checking if the email is worth replying")
     print(email["Subject"])
 
@@ -57,11 +60,13 @@ def isImportantEmail(email):
 
 
 def random_with_N_digits(n):
-    range_start = 10**(n-1)
+    
+    Srange_start = 10**(n-1)
     range_end = (10**n)-1
     return randint(range_start, range_end)
 
 def generate_ids(n):
+    
     ids = []
     for i in range(0,n):
         diff_id = False
@@ -73,6 +78,7 @@ def generate_ids(n):
     return ids
 
 def extract_text( email_message_instance):
+    
     message = ""
     maintype = email_message_instance.get_content_maintype()
     if maintype == 'multipart':
@@ -87,6 +93,7 @@ def extract_text( email_message_instance):
     return message
 
 def parseEmail(emailString):
+    
     message = em.message_from_string(emailString)
 
     
@@ -114,6 +121,7 @@ def parseEmail(emailString):
     return mail
 
 def combineEmailsDic(firstDic, secondDic):
+    
     resultingDic = {}
     for i in range(0, len(secondDic)):
         resultingDic[i] = secondDic[i]
@@ -169,6 +177,9 @@ def getInboxEmails(username, password, Num_MAIL=10):
 
 
 def tagEmailThreads(username, password):
+
+    change_web_status("Storing inbox emails in database")
+    
     inboxEmails = getInboxEmails(username,password)
     randomIDs = generate_ids(len(inboxEmails))
 
@@ -188,6 +199,9 @@ def tagEmailThreads(username, password):
     print("done")
 
 def checkNewMail(username, password):
+
+    change_web_status('Checking for new emails')
+
     inboxEmails = getInboxEmails(username,password)
 
     with open('pkl/emailsDict.pkl','rb') as f:
@@ -215,6 +229,8 @@ def checkNewMail(username, password):
                 usefulVars['randId'] = rand
                 # reply(str(usefulVars['inboxLen']-i))
                 randomIDs.append(rand)
+
+                change_web_status("Responding to new email")
                 autoRep.replyAutomatically(inboxEmails[i], rand, str(usefulVars['inboxLen']-i), imap, smtp, username) 
 
             else:
@@ -290,6 +306,15 @@ def getData(option="default"):
             print("\n")
             print(i, ': ',emailsDict[i]['id'])
 
+
+def change_web_status(status):
+
+    with open(web_status_file,'w') as f:
+        f.write(status)
+
+
+
+
 def main(username,password):
 
     if not os.path.exists("pkl"):
@@ -311,10 +336,8 @@ def main(username,password):
 
 
 
-
-
-
 web_emailsDict_path = 'G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/pkl/emailsDict.pkl'
+web_status_file = "G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/status.txt"
 
 imap = imaplib.IMAP4_SSL('imap.gmail.com',993)
 smtp = smtplib.SMTP_SSL('smtp.gmail.com')

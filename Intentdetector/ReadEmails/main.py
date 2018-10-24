@@ -14,7 +14,6 @@ from helpers import *
 
 emails = pd.read_csv('split_emails.csv')
 
-# Lets create a new frame with the data we need.
 email_df = pd.DataFrame(parse_into_emails(emails.message))
 
 # Drop emails with empty body, to or from_ columns. 
