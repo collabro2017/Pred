@@ -22,28 +22,30 @@ cosine_sim = linear_kernel(vec_train[0:1], vec_train).flatten()
 # print(cosine_sim)
 
 # Finding emails related to a query.
-query = "Arnold"
+queries = ['invoice','Package','Delivery']
 
 # Transform the query into the original vector
-vec_query = vec.transform([query])
+for query in queries:
+	print('\n=================================================================')
+	vec_query = vec.transform([query])
 
-cosine_sim = linear_kernel(vec_query, vec_train).flatten()
+	cosine_sim = linear_kernel(vec_query, vec_train).flatten()
 
-# Find top 10 most related emails to the query.
-related_email_indices = cosine_sim.argsort()[:-10:-1]
-# print out the indices of the 10 most related emails.
-print(related_email_indices)
+	# Find top 10 most related emails to the query.
+	related_email_indices = cosine_sim.argsort()[:-10:-1]
+	# print out the indices of the 10 most related emails.
+	print(related_email_indices)
 
-# print out the first email 
-first_email_index = related_email_indices[0]
-# print(email_df.body.values[first_email_index])
+	for i in related_email_indices:
+		print('--------------------------------------------------------------------------')
+		print(email_df.body.values[i])
 
-for i in related_email_indices:
-	print(email_df.body.values[i])
+# Use the EmailDataset class to query for keywords.
 
-# use the EmailDataset class to query for keywords.
-# ds = EmailDataset()
-# results = ds.query('salary', 10)
+for query in queries:
+	print('==============================================')
+	ds = EmailDataset()
+	results = ds.query(query, 10)
 
-# Print out the first result.
-# print(ds.find_email_by_index(results[0]))
+	# Print out the first result.
+	print(ds.find_email_by_index(results[0]))
