@@ -20,7 +20,7 @@ import AutoReply as autoRep
 
 def isImportantEmail(email):
 
-    change_web_status("Analyzing new Email")
+    change_web_status("Analyzing if Email is Worth Replying")
     
     print("Checking if the email is worth replying")
     print(email["Subject"])
@@ -46,9 +46,9 @@ def isImportantEmail(email):
     isAutomated = isAutomated[1:]
     isInterrogative = isInterrogative[1:]
 
-    print("shouldReply = ", shouldReply[0])
-    print("isAutomated = ", isAutomated[0])
-    print("isInterrogative = ", isInterrogative[0])
+    # print("shouldReply = ", shouldReply[0])
+    # print("isAutomated = ", isAutomated[0])
+    # print("isInterrogative = ", isInterrogative[0])
 
     if shouldReply[0] == "1" or (isAutomated[0] == "0" and isInterrogative[0].upper() == "TRUE"):
         print("Should reply to this email\n\n")
@@ -61,7 +61,7 @@ def isImportantEmail(email):
 
 def random_with_N_digits(n):
     
-    Srange_start = 10**(n-1)
+    range_start = 10**(n-1)
     range_end = (10**n)-1
     return randint(range_start, range_end)
 
@@ -198,9 +198,12 @@ def tagEmailThreads(username, password):
 
     print("done")
 
+    time.sleep(2) # Let the user actually see something (2 sec)
+
 def checkNewMail(username, password):
 
     change_web_status('Checking for new emails')
+    time.sleep(2) # Let the user actually see something (2 sec)
 
     inboxEmails = getInboxEmails(username,password)
 
@@ -230,7 +233,6 @@ def checkNewMail(username, password):
                 # reply(str(usefulVars['inboxLen']-i))
                 randomIDs.append(rand)
 
-                change_web_status("Responding to new email")
                 autoRep.replyAutomatically(inboxEmails[i], rand, str(usefulVars['inboxLen']-i), imap, smtp, username) 
 
             else:

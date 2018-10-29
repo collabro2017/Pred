@@ -12,13 +12,21 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import make_msgid
 
+import time
+
 sys.path.insert(0, 'Intentdetector')
 
-# import IntDetMain
+
+web_emailsDict_path = 'G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/pkl/ticketsReplied.pkl'
+web_status_file = "G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/status.txt"
+
+
+def change_web_status(status):
+
+    with open(web_status_file,'w') as f:
+        f.write(status)
 
 def writeData(ticketsIDs):
-
-	web_emailsDict_path = 'G:/Work/AI-EdenLLC/server/g0a_mvp_web-demo/pkl/ticketsReplied.pkl'
 
 	with open('pkl/ticketsReplied.pkl','wb') as f:
 		pickle.dump(ticketsIDs, f)
@@ -70,12 +78,16 @@ def create_auto_reply(original, randId):
 
 
 def send_auto_reply(original, randId):
+
     smtp.sendmail(
        username, [original['From']],
         create_auto_reply(original, randId).as_bytes())
+    change_web_status("Responding email using template")
     log = 'Replied to “%s” for the mail “%s”' % (original['From'],
                                                  original['Subject'])
     print(log)
+    
+    time.sleep(1) # Let the user actually see something (1 sec)
     try:
         call(['notify-send', log])
     except FileNotFoundError:
@@ -94,6 +106,9 @@ def reply(mail_number, randId):
 
 def getReplyContent():
 
+	change_web_status("Analyzing email content")
+	time.sleep(2) # Let the user actually see something (2 sec)
+
 	'''
 	Detect Intent and create body of email using machine learning.
 	'''
@@ -111,6 +126,20 @@ def getReplyContent():
 	This message was generated automatically by our A.I. agent
 
 	'''
+
+	# Detecting intent and analyzing the email content should return the template Number.
+	template_n = "1"
+
+	if(template_n == "1"):
+		change_web_status("Using template 1")
+	elif template_n == "2":
+		change_web_status("Using template 2")
+	elif template_n == "3":
+		change_web_status("Using template 3")
+	else:
+		change_web_status("Ask for human help")
+
+	time.sleep(2) # Let the user actually see something (2 sec)
 
 	return body
 
