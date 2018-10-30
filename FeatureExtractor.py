@@ -9,7 +9,7 @@ userEmail = 'example@gmail.com'
 DEFAULT = "default-id"
 
 interrogative_words=["could", "which", "what" , "whose" , "who", "whom" ,"where", "when" ,"how" ,"why", "wherefore" ,"whether","question","need answer"]
-negative_words=["unsubscribe","no-reply","noreply","mailer","automated"]
+negative_words=["unsubscribe","no-reply","noreply","mailer","automated","no_reply"]
 
 
 def words_present(all_text,keyword_list):   #checks if any word in all_text is present in keyword_list
@@ -116,7 +116,7 @@ def extractFeatures():
     for email in inboxEmails :
         features = {}
         features["sender_frequency"] = senderFrequency(email["From"],inboxEmails)
-        features["is_automated_mail"] = words_present(email["emailText"],negative_words)
+        features["is_automated_mail"] = words_present(email["emailText"] + email["From"] + email["Subject"],negative_words)
         features["is_interrogative_text"] = words_present(email["emailText"] + email["Subject"],interrogative_words)
         features["Cc"]=email["Cc"]
         #features["reply"] = replied(email["Message-ID"],sentEmails)

@@ -22,9 +22,12 @@ def isImportantEmail(email):
 
     change_web_status("Analyzing if Email is Worth Replying")
     
-    print("Checking if the email is worth replying")
-    print(email["Subject"])
+    print("Checking if it's worth replying to the email: " + str(email["Subject"]))
 
+    negative_words=["unsubscribe","no-reply","noreply","mailer","automated","no_reply"]
+
+    if any(word in email["From"] for word in negative_words):
+        return False
 
     Main.main(username, password)
     isAutomated = []
@@ -46,9 +49,11 @@ def isImportantEmail(email):
     isAutomated = isAutomated[1:]
     isInterrogative = isInterrogative[1:]
 
-    # print("shouldReply = ", shouldReply[0])
-    # print("isAutomated = ", isAutomated[0])
-    # print("isInterrogative = ", isInterrogative[0])
+    print("----------------------------------------------------")
+    print("shouldReply = ", shouldReply[0])
+    print("isAutomated = ", isAutomated[0])
+    print("isInterrogative = ", isInterrogative[0])
+    print("----------------------------------------------------")
 
     if shouldReply[0] == "1" or (isAutomated[0] == "0" and isInterrogative[0].upper() == "TRUE"):
         print("Should reply to this email\n\n")
@@ -313,8 +318,6 @@ def change_web_status(status):
 
     with open(web_status_file,'w') as f:
         f.write(status)
-
-
 
 
 def main(username,password):
