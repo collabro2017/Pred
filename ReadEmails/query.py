@@ -21,9 +21,9 @@ class EmailDataset:
 		self.train()
 
 	def train(self):
-		self.vec_train = self.vec.fit.transform(self.emails)
+		self.vec_train = self.vec.fit_transform(self.emails)
 
-	def query(self, kwyword, limit):
+	def query(self, keyword, limit):
 		vec_keyword = self.vec.transform([keyword])
 		cosine_sim = linear_kernel(vec_keyword, self.vec_train).flatten()
 		vec_keyword = self.vec.transform([keyword])
@@ -33,5 +33,4 @@ class EmailDataset:
 		return related_email_indices
 
 	def find_email_by_index(self, i):
-		return self.emails.as_matrix()[i
-
+		return self.emails.values[i]
