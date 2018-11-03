@@ -1,6 +1,0 @@
-tensorflow
-matplotlib
-numpy
-tkinter
-pandas
-sklearn
