@@ -27,8 +27,11 @@ def extract_text( email_message_instance):
         for part in email_message_instance.get_payload():
             if part.get_content_maintype() == 'text':
                 message = message + part.get_payload()
+                break
+
     elif maintype == 'text':
         message = message + email_message_instance.get_payload()
+
     return message
 
 
@@ -53,7 +56,7 @@ def parseEmail(emailString):
     emailText = extract_text(message)
 
     if emailText != None:
-        emailText = BeautifulSoup(emailText, 'html.parser').get_text()
+        emailText = BeautifulSoup(emailText, features='html.parser').get_text()
         
     mail["emailText"]=emailText
 

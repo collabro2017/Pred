@@ -250,6 +250,7 @@ def checkNewMail(username, password):
         for i in range(0, len(newEmails)):
             if anImportantMail:
                 newEmailsDic[i] = {"email":newEmails[i], "id": randomIDs[i]} 
+                anImportantMail = False
             else:
                 newEmailsDic[i] = {"email":newEmails[i]}
 

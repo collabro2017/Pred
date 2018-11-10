@@ -1,7 +1,8 @@
 ## Learning-Based-Email-Reply-Prediction
 
 Based on: Intelligent Email Prediction System (IEPS) (Paper in repo)
-Developed by goa and alejandro
+Developed by Codetrip.es 
+Jose Sanchez and Juan Verhook
 
 
 ### Requirements:
@@ -13,7 +14,7 @@ Use:
 	pip install -r requirements.txt
 	$ python getEmails.py
 
-''It will prompt you to enter your mail credentials: ''
+'''It will prompt you to enter your mail credentials: '''
 	Enter gmail username: 
 	Enter gmail password: 
 
@@ -32,12 +33,12 @@ Use:
 
 *Returns the data stored in pkl/emailsDict.pkl*
 It will prompt you for an option and the number of emails you want to print :
-Options:
-- 'content'
-- 'subject'
-- 'from'
-- 'id'
-- 'help': Displays all the options
+"Options:
+-'content'
+-'subject'
+-'from'
+-'id'
+-'help': Displays all the options
 - None for default(everything in python dict)
 
 
