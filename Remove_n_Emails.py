@@ -15,7 +15,7 @@ def removeEmails(n):
     with open('pkl/emailsDict.pkl','wb') as f:
         pickle.dump(edic, f)
 
-        
+
 if len(sys.argv)<2:
 	print("Missing number of emails to delete")
 	print("Use: python Remove_n_Emails.py number")

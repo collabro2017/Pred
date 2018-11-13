@@ -15,7 +15,7 @@ import FeatureExtractor as fe
 import os, os.path
 import re
 
-WEB_DIR = "g0a_mvp_web-demo"
+WEB_IMG_DIR = "mvp_web/static/assets/images"
 
 def top_feats_in_doc(X, features, row_id, top_n=25):
     row = np.squeeze(X[row_id].toarray())
@@ -56,8 +56,8 @@ def plot_tfidf_classfeats_h(dfs):
         ax.set_ylim([-1, x[-1]+1])
         yticks = ax.set_yticklabels(df.features)
         plt.subplots_adjust(bottom=0.09, right=0.97, left=0.15, top=0.95, wspace=0.52)
-    plt.savefig('plot.png', bbox_inches='tight')
-    plt.show()
+    plt.savefig(WEB_IMG_DIR, bbox_inches='tight')
+    # plt.show()
 
 def top_mean_feats(X, features, grp_ids=None, min_tfidf=0.1, top_n=25):
     if grp_ids:
@@ -68,6 +68,7 @@ def top_mean_feats(X, features, grp_ids=None, min_tfidf=0.1, top_n=25):
     D[D < min_tfidf] = 0
     tfidf_means = np.mean(D, axis=0)
     return top_tfidf_feats(tfidf_means, features, top_n)
+
 
 emails = []
 DIR = 'email/inbox/'
@@ -141,7 +142,7 @@ centroid_coords = pca.transform(centroids)
 # plt.show()
 
 #Use this to print the top terms per cluster with matplotlib.
-plot_tfidf_classfeats_h(top_feats_per_cluster(X, labels, features, 0.1, 25))
+# plot_tfidf_classfeats_h(top_feats_per_cluster(X, labels, features, 0.1, 25))
 
 
 
